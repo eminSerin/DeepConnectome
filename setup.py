@@ -4,7 +4,7 @@ setup(
     name='DeepConnectome',
     version='0.1',
     packages=['bin', 'docs', 'tests', 'deepconnectome', 'deepconnectome.io', 'deepconnectome.viz',
-              'deepconnectome.utils', 'deepconnectome.models', 'deepconnectome.evaluation',
+              'deepconnectome.utils', 'deepconnectome.models', 'deepconnectome.selection',
               'deepconnectome.preprocessing'],
     url='',
     license='GPL-3.0',
