@@ -290,15 +290,6 @@ class HeFluidIntBNCNN(BaseBrainNetCNN):
         super().__init__(e2e_filters=40, e2n_filters=60, n2g_filters=41, *args, **kwargs)
         print('\nInitializing BNCNN: (He et al. 2018, UKB Fluid Intelligence) BrainNetCNN architecture...')
 
-
-class GraphCNN(nn.Module):
-    """The implementation of the Graph Convulation Neural Network."""
-    # TODO: Implement GraphCNN!
-    def __init__(self):
-        super().__init__()
-        raise NotImplementedError
-
-
 class FNN(BaseDNN):
     """The implementation of the Feedforward Neural Network."""
 
@@ -366,3 +357,32 @@ class FNN(BaseDNN):
         if self.classification:
             return F.softmax(self.fnn(x))
         return self.fnn(x)
+
+
+class FC90(FNN):
+    """The implementation of FC90 architecture shown in Kawahara et al., 2016."""
+    def __init__(self, *args, **kwargs):
+        super().__init__(hidden_layers=1, layer_size=(90, 30), *args, **kwargs)
+
+
+class FC30(FNN):
+    """Implementation of FC30 architecture shown in Kawahara et al., 2016."""
+    def __init__(self, *args, **kwargs):
+        super().__init__(hidden_layers=0, layer_size=30, *args, **kwargs)
+
+
+class RCNN(BaseDNN):
+    """The implementation of the Recurrent Convulational Neural Network
+    architecture shown in Pervaiz et al., 2020."""
+    # TODO: Implement Recurrent Convulational Networks.
+    def __init__(self):
+        super().__init__()
+        raise NotImplementedError
+
+
+class GraphCNN(nn.Module):
+    """The implementation of the Graph Convulation Neural Network."""
+    # TODO: Implement GraphCNN!
+    def __init__(self):
+        super().__init__()
+        raise NotImplementedError
