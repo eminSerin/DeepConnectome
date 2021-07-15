@@ -5,7 +5,8 @@
     <orderEntry type="jdk" jdkName="Remote Python 3.7.4 (sftp://user@141.42.91.54:22/home/user/anaconda3/envs/BrainNetCNN_Personality/bin/python3.7)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
-  <component name="PackageRequirementsSettings">
-    <option name="versionSpecifier" value="Strong equality (==x.y.z)" />
+  <component name="PyDocumentationSettings">
+    <option name="format" value="GOOGLE" />
+    <option name="myDocStringFormat" value="Google" />
   </component>
 </module>
