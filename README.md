@@ -10,7 +10,7 @@ Deep Connectome allows users to perform predictions from connectivity matrices (
 
 The toolbox is currently **under development** and not ready to use! The diagram below shows the progress of development. Colors in the diagram depict different levels of development progress - yellow color represents the module is being developed; green color represents the development is partly (light green) or fully (dark green) done! 
 
-<img src="docs/DeepConnectome.png" width="960px"/> 
+<img src="docs/DeepConnectome.png" width="720px"/> 
 
 ## Versioning
 
@@ -18,7 +18,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-Deep Connectome was designed by Emin Serin, Adu Matory, Andrew Zalesky, Johann D. Kruschwitz, and Henrik Walter. The initial version of the toolbox was developed by Adu Matory [BrainNetCNN_Personality](https://github.com/furtherAdu/BrainNetCNN_Personality), and it is currently being developed by Emin Serin. 
+Deep Connectome was designed by Emin Serin, Adu Matory, Andrew Zalesky, Johann D. Kruschwitz, and Henrik Walter. The initial version of the toolbox was developed by Adu Matory ([BrainNetCNN_Personality](https://github.com/furtherAdu/BrainNetCNN_Personality)), and it is currently being developed by Emin Serin. 
 
 ## Contributing
 
@@ -26,7 +26,7 @@ You may contribute in this project in many ways such as bringing new features to
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE) file for details.
 
 
 
