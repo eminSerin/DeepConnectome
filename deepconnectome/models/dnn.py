@@ -219,7 +219,8 @@ class KawaharaBNCNN(BaseBrainNetCNN):
 
     def __init__(self, *args, **kwargs):
         super().__init__(n_outputs=1, classification=False, e2e_layers=2, e2e_filters=32, e2n_filters=64,
-                         n2g_filters=256, dense_sml=False, dense_layers=1, dropout_rate=0.5, leaky_alpha=0.33, **kwargs)
+                         n2g_filters=256, dense_sml=False, dense_layers=1, dropout_rate=0.5,
+                         leaky_alpha=0.33, *args, **kwargs)
         print('\nInitializing (Kawahara et al., 2016) BrainNetCNN architecture')
 
 
