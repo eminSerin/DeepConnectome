@@ -1,11 +1,13 @@
 """
-The :mod:`tests.simulation` module includes functions to generate synthetic network data.
+The :mod:`deepconnectome.datasets._sample_generator` module includes
+functions to generate synthetic network data.
 """
 
 # Import modules
 import networkx as nx
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
+from deepconnectome.io.utils import make_triangular_idx
 
 
 def _find_relevant_edges(G, n_edges, form_network=True):
@@ -69,11 +71,12 @@ def _gen_network(n_nodes, network='small_world', seed=None, *args, **kwargs):
 
 
 def _gen_base_data(n_sample, n_nodes, n_rel_edges, network, connected,
-                    seed=None, *args, **kwargs):
+                   seed=None, *args, **kwargs):
     """Helper function to generate base network data
     containing only gaussian noise (mean=0, std=1)."""
     G = _gen_network(n_nodes, network, seed, *args, **kwargs)
-    rel_edge_idx = _find_relevant_edges(G, n_rel_edges, connected)
+    rel_edge_idx = make_triangular_idx(_find_relevant_edges(G, n_rel_edges, connected),
+                                       tri='upper')
     # Generate data.
     X = np.zeros((n_sample, n_nodes, n_nodes))
     edge_weight = np.random.randn(G.number_of_edges(), n_sample)

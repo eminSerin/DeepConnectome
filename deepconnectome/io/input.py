@@ -3,7 +3,7 @@ The :mod:`deepconnectome.io.input` module includes functions and classes
 to handle input data.
 """
 
-from deepconnectome.io.utils import vec_to_mat, find_flat_idx, mat_to_vec
+from deepconnectome.io.utils import vec_to_mat, find_flat_idx, mat_to_vec, find_mat_idx
 
 
 class MatrixVectorizer:
@@ -81,6 +81,21 @@ class MatrixVectorizer:
             return find_flat_idx(idx, self._dims[-1],
                                  tri=self.tri, mask=self._mask)
         return find_flat_idx(idx, n_nodes, tri=self.tri)
+
+    def find_mat_idx(self, idx, mask=None):
+        """Transforms vectorized indices to matrix indices.
+
+        Args:
+            idx (list): List of vectorized indices.
+            mask (numpy.ndarray): Mask used to extract edges from symmetric matrix.
+                mask attribute stored in the object will be used if no mask is provided.
+
+        Returns:
+            (list): List of tuples containing matrix indices (row,column).
+        """
+        if mask is None:
+            mask = self._mask
+        return find_mat_idx(idx, mask=mask)
 
     def _fit_transform(self, X):
         """Private function used to transform metrix."""

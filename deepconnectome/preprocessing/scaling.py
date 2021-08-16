@@ -12,12 +12,12 @@ class ScaleTensorDec(TransformerMixin):
     to work with 4D tensor data."""
     def __init__(self, cls):
         self._cls = cls
-        self._scalers = []
+        self._scaler_list = []
         self._dims = None
 
     def __call__(self, *args, **kwargs):
         self._cls = self._cls(*args, **kwargs)
-        self._scalers = []
+        self._scaler_list = []
         return self
 
     def fit(self, X, y=None, *args, **kwargs):
@@ -27,7 +27,7 @@ class ScaleTensorDec(TransformerMixin):
                 X_2d = X[:, c, :, :].reshape(-1, self._dims[2] * self._dims[3])
                 scaler = clone(self._cls)
                 scaler.fit(X_2d, y, *args, **kwargs)
-                self._scalers.append(scaler)
+                self._scaler_list.append(scaler)
         elif len(self._dims) == 2:
             self._cls.fit(X, y)
         else:
@@ -38,7 +38,7 @@ class ScaleTensorDec(TransformerMixin):
         if len(self._dims) == 4:
             for c in range(self._dims[1]):
                 X_2d = X[:, c, :, :].reshape(-1, self._dims[2] * self._dims[3])
-                X[:, c, :, :] = self._scalers[c].transform(X_2d).reshape(-1, self._dims[2], self._dims[3])
+                X[:, c, :, :] = self._scaler_list[c].transform(X_2d).reshape(-1, self._dims[2], self._dims[3])
             return X
         elif len(self._dims) == 2:
             return self._cls.transform(X)

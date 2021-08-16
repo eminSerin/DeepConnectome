@@ -97,7 +97,7 @@ def vec_to_mat(X_vec, mask):
 
 
 def find_flat_idx(idx, n_nodes, tri='upper', mask=None):
-    """Find indices of edges of a symmetric matrix in its vectorized form.
+    """Finds indices of edges of a symmetric matrix in its vectorized form.
 
     It takes (x,y) indices such as (6,83) and returns the equivalent
     of them in vectorized form of matrix such as (876).
@@ -132,3 +132,57 @@ def find_flat_idx(idx, n_nodes, tri='upper', mask=None):
     if tri is None:
         return np.where(adj.flatten())
     return np.where(mat_to_vec(adj + adj.T, tri=tri, mask=mask)[0])
+
+
+def find_mat_idx(idx, n_nodes=None, tri='upper', mask=None):
+    """Finds edge indices from a symmetric matrix from given vectorized indices.
+
+    Args:
+        idx (list): List of vectorized indices.
+        n_nodes (int): Number of nodes of vectorized symmetric matrix.
+        tri (str): A specific triangular from which vectorized indices were extracted.
+        mask (numpy.ndarray): Mask can be used if a specific part of matrix
+            is needed to be masked, while finding indices.
+
+    Returns:
+        (list): List of tuples containing the indices of the edges.
+
+    Raises:
+        ValueError: if n_nodes is not provided when mask parameter remains None.
+    """
+    if mask is not None:
+        idx_list = np.where(mask)
+    else:
+        if n_nodes is None:
+            raise ValueError('n_nodes must be provided if mask is not entered!')
+
+        if tri == 'upper':
+            idx_list = np.triu_indices_from(np.ones((n_nodes, n_nodes)), k=1)
+        else:
+            idx_list = np.tril_indices_from(np.ones((n_nodes, n_nodes)), k=-1)
+    idx_list = list(zip(*idx_list))
+    return [idx_list[x] for x in idx]
+
+
+def make_triangular_idx(idx, tri='upper'):
+    """Converts input edge indices to ones from a specific triangular in
+    the original matrix.
+
+    It assumes that the edge indices was gathered from a symmetric matrix.
+
+    Args:
+        idx (list): List of tuples containing the indices.
+        tri: A specific triangular to which edge indices will be converted.
+
+    Returns:
+        (list): List of tuples containing converted indices.
+
+    Returns:
+        ValueError: If "tri" parameter is not either upper or lower.
+    """
+    if tri == 'upper':
+        return [tuple(sorted(i)) for i in idx]
+    elif tri == 'lower':
+        return [tuple(sorted(i, reverse=True)) for i in idx]
+    else:
+        raise ValueError('tri parameter must be either upper or lower!')
