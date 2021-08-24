@@ -187,7 +187,7 @@ def make_regression(n_sample=50, n_nodes=100, n_rel_edges=50, noise=0,
         y = X_rel_edges.dot(coef)
     elif degree > 1:
         # Add polynomials of relevant features before computing target.
-        poly = PolynomialFeatures(degree=4, order='F').fit_transform(X_rel_edges)
+        poly = PolynomialFeatures(degree=degree, order='F').fit_transform(X_rel_edges)
         coef = np.random.rand(poly.shape[1])
         y = poly.dot(coef)
     else:
